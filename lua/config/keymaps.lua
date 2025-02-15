@@ -46,5 +46,16 @@ if vim.g.vscode then
   vscode_map("n", "<Leader>ds", "workbench.action.debug.stop")
   vscode_map("n", "<Leader>do", "workbench.action.debug.stepOver")
   vscode_map("n", "<Leader>di", "workbench.action.debug.stepInto")
-  vscode_map("n", "<Leader>du", "workbench.action.debug.stepOut")
+end
+
+local os = vim.loop.os_uname().sysname
+
+if os == "linux" then
+  vim.os.shell = "fish"
+else
+  if vim.fn.executable("pwsh") == 1 then
+    vim.o.shell = "pwsh"
+  else
+    vim.o.shell = "powershell"
+  end
 end
