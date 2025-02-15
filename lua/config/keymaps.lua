@@ -50,7 +50,7 @@ end
 
 local os = vim.loop.os_uname().sysname
 
-if os == "linux" then
+if os == "Linux" then
   vim.os.shell = "fish"
 else
   if vim.fn.executable("pwsh") == 1 then
