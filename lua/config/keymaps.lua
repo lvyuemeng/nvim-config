@@ -16,36 +16,57 @@ if vim.g.vscode then
     end, opts)
   end
 
-  -- Buffer navigation
+  print("VSCode extension loaded:", package.loaded["vscode"] ~= nil)
+
+  -- Buffer/Editor Management
+  vscode_map("n", "<leader>bd", "workbench.action.closeActiveEditor")
+  vscode_map("n", "<leader>bo", "workbench.action.closeOtherEditors")
+  vscode_map("n", "<leader>bD", "workbench.action.closeEditorsInGroup")
+  vscode_map("n", "<leader>bb", "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
   vscode_map("n", "]b", "workbench.action.nextEditor")
   vscode_map("n", "[b", "workbench.action.previousEditor")
-  -- Close buffer
-  vscode_map("n", "<leader>bd", "workbench.action.closeActiveEditor")
+
+  -- Window Management
+  vscode_map("n", "<leader>-", "workbench.action.splitEditorDown")
+  vscode_map("n", "<leader>|", "workbench.action.splitEditorRight")
 
   -- File operations
-  vscode_map("n", "<Leader>w", "workbench.action.files.save")
-  vscode_map("n", "<Leader>wa", "workbench.action.files.saveAll")
-  vscode_map("n", "<Leader>q", "workbench.action.closeActiveEditor")
   vscode_map("n", "<Leader>e", "workbench.view.explorer")
-  vscode_map("n", "<Leader>n", "workbench.action.files.newUntitledFile")
-  vscode_map("n", "<Leader>o", "workbench.action.files.openFile")
-  vscode_map("n", "<leader>cf", "editor.action.formatDocument")
+  vscode_map("n", "<leader>fn", "workbench.action.files.newUntitledFile")
+  vscode_map("n", "<C-s>", "workbench.action.files.save")
 
-  -- Code navigation
+  -- Code Navigation
   vscode_map("n", "gd", "editor.action.revealDefinition")
+  vscode_map("n", "gD", "editor.action.peekDefinition")
   vscode_map("n", "gr", "editor.action.goToReferences")
   vscode_map("n", "gi", "editor.action.goToImplementation")
   vscode_map("n", "K", "editor.action.showHover")
 
-  -- Code Action
-  vscode_map("n", "<leader>ca", "editor.action.quickFix")
-  vscode_map("n", "<leader>rn", "editor.action.rename")
+  -- Search/Diagnostics
+  vscode_map("n", "n", "editor.action.nextMatchFindAction")
+  vscode_map("n", "N", "editor.action.previousMatchFindAction")
+  vscode_map("n", "<leader>xl", "workbench.actions.view.problems")
+  vscode_map("n", "]d", "editor.action.marker.nextInFiles")
+  vscode_map("n", "[d", "editor.action.marker.previousInFiles")
+
+  -- Code Actions
+  vscode_map({ "n", "v" }, "<leader>ca", "editor.action.quickFix")
+  vscode_map("n", "<leader>cr", "editor.action.rename")
+  vscode_map({ "n", "v" }, "<leader>cf", "editor.action.formatDocument")
 
   -- Debugging
   vscode_map("n", "<Leader>dd", "workbench.action.debug.start")
   vscode_map("n", "<Leader>ds", "workbench.action.debug.stop")
   vscode_map("n", "<Leader>do", "workbench.action.debug.stepOver")
   vscode_map("n", "<Leader>di", "workbench.action.debug.stepInto")
+
+  -- Terminal
+  vscode_map("n", "<leader>ft", "workbench.action.terminal.toggleTerminal")
+  vscode_map("t", "<C-/>", "workbench.action.toggleMaximizedPanel")
+
+  -- UI Toggles
+  vscode_map("n", "<leader>us", "workbench.action.toggleWordWrap")
+  vscode_map("n", "<leader>ud", "errors.toggleProblems")
 end
 
 local os = vim.loop.os_uname().sysname
