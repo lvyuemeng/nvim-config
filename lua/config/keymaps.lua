@@ -43,8 +43,6 @@ if vim.g.vscode then
   vscode_map("n", "K", "editor.action.showHover")
 
   -- Search/Diagnostics
-  vscode_map("n", "n", "editor.action.nextMatchFindAction")
-  vscode_map("n", "N", "editor.action.previousMatchFindAction")
   vscode_map("n", "<leader>xl", "workbench.actions.view.problems")
   vscode_map("n", "]d", "editor.action.marker.nextInFiles")
   vscode_map("n", "[d", "editor.action.marker.previousInFiles")
@@ -77,6 +75,11 @@ else
   if vim.fn.executable("pwsh") == 1 then
     vim.o.shell = "pwsh"
   else
-    vim.o.shell = "powershell"
+    vim.o.shell = "powershell.exe"
   end
+  vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command "
+  vim.o.shellxquote = ""
+  vim.o.shellquote = ""
+  vim.o.shellpipe = "| Out-File -Encoding UTF8 %s"
+  vim.o.shellredir = "| Out-File -Encoding UTF8 %s"
 end
