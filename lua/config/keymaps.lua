@@ -70,7 +70,11 @@ end
 local os = vim.loop.os_uname().sysname
 
 if os == "Linux" then
-  vim.os.shell = "fish"
+  if vim.fn.executable("fish") == 1 then
+    vim.os.shell = "fish"
+  else
+    vim.o.shell = "bash"
+  end
 else
   if vim.fn.executable("pwsh") == 1 then
     vim.o.shell = "pwsh"
